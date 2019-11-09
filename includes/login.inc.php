@@ -36,12 +36,15 @@ if (isset($_POST['login-submit'])) {
                     header("Location:../login.php?error=wrongpassword&email=" . $email);
                     exit();
                 }
+            } else {
+                header("Location:../login.php?error=emailnotfound");
+                exit();
             }
         }
     }
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 } else {
-    header("Location: ../login.php?login=failed");
+    header("Location: ../login.php");
     exit();
 }

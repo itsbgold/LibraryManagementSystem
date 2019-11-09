@@ -19,16 +19,20 @@ session_start();
                 <li>
                     <a href="index.php">Home</a></li>
                 <li><a href="#">Search Books</a></li>
-                <li><a href="#">Add Books</a></li>
                 <?php
                 if (isset($_SESSION["user_id"])) {
-                    echo '<li>
-                    <a href="register.php">Add a member</a>
-                </li>
-                <form action="includes/logout.inc.php" method="post">
-                <button type="submit" name="logout-submit">LogOut</button>
-            </form>
-            ';
+                    if ($_SESSION["role"] == "admin") {
+                        echo '
+                        <li><a href="#">Add Books</a></li>
+                        <li><a href="register.php">Add a member</a></li>
+                        ';
+                    }
+
+                    echo '
+                    <form action="includes/logout.inc.php" method="post">
+                        <button type="submit" name="logout-submit">LogOut</button>
+                    </form>
+                    ';
                 } else {
                     echo "<li>
                     <a href='login.php'>Login</a></li>";
