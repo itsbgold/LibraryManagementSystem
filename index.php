@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Library</title>
-</head>
-<body>
-    Initial file
-</body>
-</html>
+<?php
+require "header.php";
+?>
+<main>
+    <h2>Welcome to Library Manage System</h2>
+    <br>
+    <form action="includes/search.inc.php" method="post">
+        <p>Choose role</p>
+        <select name="role">
+            <option value="admin">Admin</option>
+            <option value="member">Member</option>
+        </select><br>
+        <p>Search by Firstname/Lastname/Email</p>
+        <input type="text" name="search">
+        <button type="submit" name="login-submit">Show Info</button>
+    </form>
+</main>
+<?php
+require "footer.php";
+?>
