@@ -18,13 +18,14 @@ session_start();
             <ul>
                 <li>
                     <a href="index.php">Home</a></li>
-                <li><a href="#">Search Books</a></li>
+                <li><a href="index.php">Search Books</a></li>
                 <?php
                 if (isset($_SESSION["user_id"])) {
                     if ($_SESSION["role"] == "admin") {
                         echo '
                         <li><a href="addbooks.php">Add Books</a></li>
                         <li><a href="register.php">Add a member</a></li>
+                        <li><a href="searchmember.php">Search members</a></li>
                         ';
                     }
 
@@ -41,3 +42,6 @@ session_start();
             </ul>
         </nav>
     </header>
+    <main>
+        <h2>Welcome to Library Manage System</h2>
+        <br>

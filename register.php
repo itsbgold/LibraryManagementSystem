@@ -28,7 +28,7 @@ require "header.php";
         <select name="gender">
             <option value="male"> Male</option>
             <option value="female"> Female</option>
-            <option value="other"> Other</option>
+            <option value="others"> Other</option>
         </select><br>
         <p>Please select role:</p>
         <select name="role">
