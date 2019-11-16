@@ -9,7 +9,14 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Library</title>
+    <title>Library</title><!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -24,7 +31,6 @@ session_start();
                     if ($_SESSION["role"] == "admin") {
                         echo '
                         <li><a href="addbooks.php">Add Books</a></li>
-                        <li><a href="register.php">Add a member</a></li>
                         <li><a href="searchmember.php">Search members</a></li>
                         ';
                     }
@@ -35,8 +41,9 @@ session_start();
                     </form>
                     ';
                 } else {
-                    echo "<li>
-                    <a href='login.php'>Login</a></li>";
+                    echo "
+                    <li><a href='register.php'>Add a member</a></li>
+                    <li><a href='login.php'>Login</a></li>";
                 }
                 ?>
             </ul>
