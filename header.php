@@ -23,7 +23,7 @@ session_start();
                 if (isset($_SESSION["user_id"])) {
                     if ($_SESSION["role"] == "admin") {
                         echo '
-                        <li><a href="#">Add Books</a></li>
+                        <li><a href="addbooks.php">Add Books</a></li>
                         <li><a href="register.php">Add a member</a></li>
                         ';
                     }
