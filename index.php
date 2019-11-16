@@ -84,6 +84,11 @@ require './includes/dbh.inc.php';
             echo "<th>Subject</th>";
             echo "<th>Author/Editor</th>";
             echo "<th>ISBN</th>";
+            if (isset($_SESSION["user_id"])) {
+                if ($_SESSION["role"] == "admin") {
+                    echo "<th>Actions</th>";
+                }
+            }
             echo "</tr>";
             while ($row = mysqli_fetch_array($result)) {
                 echo "<tr>";
@@ -93,6 +98,11 @@ require './includes/dbh.inc.php';
                 echo "<td>" . $row['subject'] . "</td>";
                 echo "<td>" . $row['author'] . "</td>";
                 echo "<td>" . $row['isbn'] . "</td>";
+                if (isset($_SESSION["user_id"])) {
+                    if ($_SESSION["role"] == "admin") { ?>
+                        <td><a href="index.php?id=<? echo $row['text_id']; ?>">Delete</a></td>
+    <?php }
+                }
                 echo "</tr>";
             }
             echo "</table>";
@@ -101,12 +111,26 @@ require './includes/dbh.inc.php';
             echo "No records matching your query were found.";
         }
     } else {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+        echo "ERROR: Could not able to execute the query." . mysqli_error($conn);
     }
-    mysqli_close($conn);
     ?>
 
 </main>
+<?php
+if (isset($_SESSION["user_id"])) {
+    if ($_SESSION["role"] == "admin") {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            mysqli_query($conn, "DELETE from text WHERE text_id='$id'");
+            // mysqli_query();
+            header("Location: index.php");
+            exit();
+        }
+    }
+}
+
+mysqli_close($conn);
+?>
 <?php
 require "footer.php";
 ?>
