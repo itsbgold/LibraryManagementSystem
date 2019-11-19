@@ -65,3 +65,38 @@ $retval = mysqli_query($conn, $sql);
 if (!$retval) {
     die('COULD NOT CREATE TABLE\n: ' . mysqli_error($conn));
 };
+
+// Reservations
+$sql = "CREATE TABLE IF NOT EXISTS reservation (
+    resv_id int(11) NOT NULL AUTO_INCREMENT,
+    user_id int(11),
+    text_id int(11),
+    time_of_resv DATETIME NOT NULL DEFAULT(CURRENT_TIMESTAMP),
+    PRIMARY KEY(resv_id),
+    FOREIGN KEY (text_id) REFERENCES text(text_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+  )";
+$retval = mysqli_query($conn, $sql);
+if (!$retval) {
+    die('COULD NOT CREATE TABLE\n: ' . mysqli_error($conn));
+};
+
+// Reservations
+$sql = "CREATE TABLE IF NOT EXISTS issue (
+    issue_id int(11) NOT NULL AUTO_INCREMENT,
+    user_id int(11),
+    text_id int(11),
+    start_date datetime DEFAULT (CURRENT_TIMESTAMP),
+    due_date datetime DEFAULT NULL,
+    return_date datetime DEFAULT NULL,
+    reissue_date_1 datetime DEFAULT NULL,
+    reissue_date_2 datetime DEFAULT NULL,
+    reissue_no int(11) NOT NULL DEFAULT 0,
+    PRIMARY KEY(issue_id),
+    FOREIGN KEY (text_id) REFERENCES text(text_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+  )";
+$retval = mysqli_query($conn, $sql);
+if (!$retval) {
+    die('COULD NOT CREATE TABLE\n: ' . mysqli_error($conn));
+};

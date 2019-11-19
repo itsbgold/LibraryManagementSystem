@@ -28,9 +28,13 @@ session_start();
                 <li><a href="index.php">Search Books</a></li>
                 <?php
                 if (isset($_SESSION["user_id"])) {
+                    echo '
+                    <li><a href="profile.php">My Profile</a></li>
+                    ';
                     if ($_SESSION["role"] == "admin") {
                         echo '
                         <li><a href="addbooks.php">Add Books</a></li>
+                        <li><a href="register.php">Add a member</a></li>
                         <li><a href="searchmember.php">Search members</a></li>
                         ';
                     }
@@ -42,7 +46,6 @@ session_start();
                     ';
                 } else {
                     echo "
-                    <li><a href='register.php'>Add a member</a></li>
                     <li><a href='login.php'>Login</a></li>";
                 }
                 ?>
