@@ -1,4 +1,5 @@
 <?php
+$page = "addbooks";
 require "header.php";
 ?>
 <main>

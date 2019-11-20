@@ -81,7 +81,7 @@ if (!$retval) {
     die('COULD NOT CREATE TABLE\n: ' . mysqli_error($conn));
 };
 
-// Reservations
+// Issues
 $sql = "CREATE TABLE IF NOT EXISTS issue (
     issue_id int(11) NOT NULL AUTO_INCREMENT,
     user_id int(11),

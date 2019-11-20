@@ -1,4 +1,5 @@
 <?php
+$page = "profile";
 require "header.php";
 require './includes/dbh.inc.php';
 

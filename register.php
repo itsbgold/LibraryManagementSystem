@@ -1,4 +1,5 @@
 <?php
+$page = "register";
 require "header.php";
 ?>
 <main>
