@@ -3,15 +3,11 @@
   --input-padding-y: 0.75rem;
 }
 
-body {
-    min-height: 70vh;
-  /* background: #007bff;
-  background: linear-gradient(to right, #0062e6, #33aeff); */
-}
+/* body {
+    height: 100vh !important;
+} */
 
 .card-signin {
-  border: solid black 0.5px;
-  border-radius: 1rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -31,7 +27,6 @@ body {
 
 .form-signin .btn {
   font-size: 80%;
-  border-radius: 5rem;
   letter-spacing: 0.1rem;
   font-weight: bold;
   padding: 1rem;
@@ -45,7 +40,6 @@ body {
 
 .form-label-group input {
   height: auto;
-  border-radius: 2rem;
 }
 
 .form-label-group > input,
@@ -64,7 +58,7 @@ body {
   line-height: 1.5;
   color: #495057;
   border: 1px solid transparent;
-  border-radius: 0.25rem;
+  /* border-radius: 0.25rem; */
   transition: all 0.1s ease-in-out;
 }
 
@@ -122,4 +116,14 @@ body {
   .form-label-group input:-ms-input-placeholder {
     color: #777;
   }
+}
+
+
+footer {
+  margin-top: 20px;
+  position: relative;
+  left: 0;
+  right: 0;
+  bottom: -205px !important;
+  margin-bottom: 0;
 }
