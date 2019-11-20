@@ -51,7 +51,7 @@ if (isset($_POST['register'])) {
                     $pwdhash = password_hash($pwd, PASSWORD_DEFAULT);
                     mysqli_stmt_bind_param($stmt, "ssssssss", $firstname, $lastname, $email, $phone, $address, $pwdhash, $role, $gender);
                     mysqli_stmt_execute($stmt);
-                    header("Location:../register.php?success=registersuccess");
+                    header("Location:../searchmember.php?success=membersuccess");
                     exit();
                 }
             }

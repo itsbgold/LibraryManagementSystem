@@ -30,7 +30,7 @@ require "header.php";
                             <label for="inputEmail">Email address</label>
                         </div>
                         <div class="form-label-group">
-                            <input name="pwd" type="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                            <input name="pwd" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                             <label for="inputPassword">Password</label>
                         </div>
                         <button name="login-submit" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>

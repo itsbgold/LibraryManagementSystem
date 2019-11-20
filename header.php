@@ -19,7 +19,7 @@ session_start();
 
 <body>
     <!--Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="index.php" class="active">Online Library</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,8 +32,8 @@ session_start();
                 if (isset($_SESSION["user_id"])) {
                     if ($_SESSION["role"] == "admin") { ?>
                         <li class="nav-item <? if ($page == "addbooks") { ?>active<? } ?>"><a class="nav-link" href="addbooks.php">Add Books</a></li>
-                        <li class="nav-item <? if ($page == "register") { ?>active<? } ?>"><a class="nav-link" href="register.php">Add a member</a></li>
                         <li class="nav-item <? if ($page == "searchmember") { ?>active<? } ?>"><a class="nav-link" href="searchmember.php">Search members</a></li>
+                        <li class="nav-item <? if ($page == "register") { ?>active<? } ?>"><a class="nav-link" href="register.php">Add a member</a></li>
                 <? }
                 }
                 ?>
