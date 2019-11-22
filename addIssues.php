@@ -43,7 +43,8 @@ $textId;
                     $userId = $_GET["user_id"];
                     $sql = "SELECT * FROM user WHERE user_id = $userId ";
                     $sql2 = "SELECT * FROM text WHERE text_id = $textId ";
-                    if ($result = mysqli_query($conn, $sql)) { ?>
+                    $result = mysqli_query($conn, $sql);
+                    if ($result) { ?>
                         <div class='col-md-6'>
                             <div class='card'>
                                 <div class='card-body'>
@@ -80,7 +81,6 @@ $textId;
                                                         </div>
                                                         ";
                                                     }
-                                                    mysqli_free_result($result);
                                                 } else {
                                                     echo "Profile wasn't found.";
                                                 }
@@ -102,10 +102,8 @@ $textId;
                                             <?php
                                                         if (mysqli_num_rows($result2) > 0) {
                                                             while ($row = mysqli_fetch_array($result2)) {
-                                                                echo "<h2>".$row['book_state']."</h2>";
                                                                 if ($row['book_state'] != "free") {
-                                                                    $sql3  = "SELECT user.firstname, user.lastname, issue.user_id FROM user, issue WHERE issue.text_id = $textId AND issue.return_date = NULL AND user.user_id = issue.user_id ";
-                                                                    echo $sql3;
+                                                                    $sql3  = "SELECT B.`firstname` , B.`lastname`, A.user_id, A.text_id FROM `issue` AS A INNER JOIN `user` AS B ON A.user_id = B.user_id where text_id=$textId and `return_date` IS NULL ";
                                                                     if ($result3 = mysqli_query($conn, $sql3)) {
                                                                         if (mysqli_num_rows($result3) > 0) {
                                                                             while ($row1 = mysqli_fetch_array($result3)) {
@@ -144,7 +142,7 @@ $textId;
                                                                 ";
                                                             }
                                                             mysqli_free_result($result2);
-                                                            if ($stateText == "Free") {
+                                                            if ($result && mysqli_num_rows($result) > 0 && $stateText == "Free") {
                                                                 ?>
                                                     <form method="post" action="addIssues.php">
                                                         <input type="hidden" name="userId" value="<?php echo $userId; ?>" />
@@ -175,11 +173,12 @@ $textId;
 </div>
 <?php
 if (isset($_POST["issue-user"])) {
-    $qry = "INSERT INTO issue ( user_id, text_id, start_date, due_date) VALUES
-                (?, ?, CURRENT_TIMESTAMP, DATE_ADD(NOW(), INTERVAL 15 DAY));";
-
     $textId = $_POST["textId"];
     $userId = $_POST["userId"];
+    $qry = "INSERT INTO issue ( user_id, text_id, start_date, due_date) VALUES
+                (?, ?, CURRENT_TIMESTAMP, DATE_ADD(NOW(), INTERVAL 15 DAY));";
+    $qry2 = "UPDATE text SET book_state = 'Issued' WHERE text_id = $textId;";
+    $qry3 = "UPDATE user SET no_of_books = no_of_books + 1 WHERE user_id = $userId;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $qry)) {
         header("Location: addIssues.php?error=sqlerror&user_id=" . $userId . "&text_id=" . $textId);
@@ -187,7 +186,9 @@ if (isset($_POST["issue-user"])) {
     } else {
         mysqli_stmt_bind_param($stmt, "ss", $userId, $textId);
         mysqli_stmt_execute($stmt);
-        header("Location: addIssues.php?success=membersuccess&user_id=" . $userId);
+        mysqli_query($conn, $qry2);
+        mysqli_query($conn, $qry3);
+        header("Location: addIssues.php?success=membersuccess&user_id=" . $userId . "&text_id=" . $textId . "&search-issue-submit=");
         exit();
     }
 }
