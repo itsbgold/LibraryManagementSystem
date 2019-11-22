@@ -103,23 +103,22 @@ require './includes/dbh.inc.php';
         echo "ERROR: Could not able to execute the query." . mysqli_error($conn);
     }
     ?>
-
-    </main>
-    <?php
-    if (isset($_SESSION["user_id"])) {
-        if ($_SESSION["role"] == "admin") {
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                mysqli_query($conn, "DELETE from text WHERE text_id='$id'");
-                // mysqli_query();
-                header("Location: index.php");
-                exit();
-            }
+</div>
+</main>
+<?php
+if (isset($_SESSION["user_id"])) {
+    if ($_SESSION["role"] == "admin") {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            mysqli_query($conn, "DELETE from text WHERE text_id='$id'");
+            header("Location: index.php");
+            exit();
         }
     }
+}
 
-    mysqli_close($conn);
-    ?>
-    <?php
-    require "footer.php";
-    ?>
+mysqli_close($conn);
+?>
+<?php
+require "footer.php";
+?>
