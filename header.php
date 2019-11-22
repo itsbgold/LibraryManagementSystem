@@ -34,6 +34,7 @@ session_start();
                         <li class="nav-item <? if ($page == "addbooks") { ?>active<? } ?>"><a class="nav-link" href="addbooks.php">Add Books</a></li>
                         <li class="nav-item <? if ($page == "searchmember") { ?>active<? } ?>"><a class="nav-link" href="searchmember.php">Search members</a></li>
                         <li class="nav-item <? if ($page == "register") { ?>active<? } ?>"><a class="nav-link" href="register.php">Add a member</a></li>
+                        <li class="nav-item <? if ($page == "addIssues") { ?>active<? } ?>"><a class="nav-link" href="addIssues.php">Issue books</a></li>
                 <? }
                 }
                 ?>

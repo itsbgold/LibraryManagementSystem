@@ -8,7 +8,6 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 ?>
-<!-- <h1>Your Profile</h1> -->
 
 <div class="container">
     <div class="row">

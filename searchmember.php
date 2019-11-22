@@ -73,9 +73,9 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
             echo "<table class='table table-hover table-bordered'>";
             echo '<thead class="thead-dark">';
             echo "<tr>";
-            echo "<th scope='col'>id</th>";
-            echo "<th scope='col'>First Name</th>";
-            echo "<th scope='col'>Last Name</th>";
+            echo "<th scope='col'>Id</th>";
+            echo "<th scope='col'>Firstname</th>";
+            echo "<th scope='col'>Lastname</th>";
             echo "<th scope='col'>Email</th>";
             echo "<th scope='col'>Phone No</th>";
             echo "<th scope='col'>Role</th>";

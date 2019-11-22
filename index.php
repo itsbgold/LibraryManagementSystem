@@ -64,7 +64,7 @@ require './includes/dbh.inc.php';
             echo "<table class='table table-hover table-bordered'>";
             echo '<thead class="thead-dark">';
             echo "<tr>";
-            echo "<th scope='col'>id</th>";
+            echo "<th scope='col'>Id</th>";
             echo "<th scope='col'>Title</th>";
             echo "<th scope='col'>Type</th>";
             echo "<th scope='col'>Subject</th>";
