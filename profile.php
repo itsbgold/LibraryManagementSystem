@@ -196,6 +196,62 @@ if (isset($_GET['uid'])) {
     </div>
 </div>
 
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Reservation Details</h4>
+                        <hr>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <?php
+                    $sql  = "SELECT A.resv_id, A.time_of_resv, B.title , B.author, A.text_id FROM reservation AS A INNER JOIN text AS B ON A.text_id = B.text_id where user_id=" . $uid;
+                    if ($result = mysqli_query($conn, $sql)) {
+                        if (mysqli_num_rows($result) > 0) {
+                            echo "<table class='table table-hover table-bordered'>";
+                            echo '<thead class="thead-dark">';
+                            echo "<tr>";
+                            echo "<th scope='col'>Book Id</th>";
+                            echo "<th scope='col'>Details</th>";
+                            echo "<th scope='col'>Reservation date</th>";
+                            echo "<th scope='col'>Remarks</th>";
+                            echo "</tr>";
+                            echo "</thead> ";
+                            echo "<tbody> ";
+                            while ($row = mysqli_fetch_array($result)) {
+                                echo "<tr>";
+                                echo "<th scope='col'>" . $row['text_id'] . "</td>";
+                                echo "<td>" . $row['title'] . " - " . $row['author'] . "</td>";
+                                echo "<td>" . date('d/m/Y', strtotime($row['time_of_resv'])) . "</td>";
+                                ?>
+                                <td>
+                                    <form method="post" action="includes/cancelResv.inc.php">
+                                        <input type="hidden" name="resv_id" value="<?php echo $row['resv_id']; ?>" />
+                                        <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
+                                        <button class="btn btn-outline-dark btn-sm" name="cancel-resv" type="submit">Cancel</button>
+                                    </form>
+                                </td>
+                                </tr>
+                    <? }
+                            echo "</tbody> ";
+                            echo "</table>";
+                            mysqli_free_result($result);
+                        } else {
+                            echo "No reservations yet.";
+                        }
+                    } else {
+                        echo "ERROR: Could not able to execute the query." . mysqli_error($conn);
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 require "footer.php";
 ?>
