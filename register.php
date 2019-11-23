@@ -1,6 +1,11 @@
 <?php
 $page = "register";
 require "header.php";
+
+if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <div class="row">

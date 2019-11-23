@@ -1,6 +1,11 @@
 <?php
-if (isset($_POST['addbooks'])) {
 
+if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
+    header("Location: ../index.php");
+    exit();
+}
+
+if (isset($_POST['addbooks'])) {
     require 'dbh.inc.php';
     $title = $_POST["title"];
     $isbn = $_POST["isbn"];
