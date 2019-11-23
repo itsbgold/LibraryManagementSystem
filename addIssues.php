@@ -7,8 +7,6 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
     header("Location: index.php");
     exit();
 }
-$userId;
-$textId;
 ?>
 
 <div class="row">
@@ -130,7 +128,7 @@ $textId;
                                                                                 echo "
                                                                 <div class='col-md-12'>
                                                                     <div class='form-group row'>
-                                                                        <label for='name' class='col-6 col-form-label'>User ID</label>
+                                                                        <label for='name' class='col-6 col-form-label'>Book ID</label>
                                                                         <div class='col-6'>
                                                                         " . $row['text_id'] . "</div>
                                                                     </div>
@@ -154,7 +152,7 @@ $textId;
                                                                             mysqli_free_result($result2);
                                                                             if ($result && mysqli_num_rows($result) > 0 && $stateText == "Free") {
                                                                                 ?>
-                                                                    <form method="post" action="addIssues.php">
+                                                                    <form method="post" action="includes/issueUser.inc.php">
                                                                         <input type="hidden" name="userId" value="<?php echo $userId; ?>" />
                                                                         <input type="hidden" name="textId" value="<?php echo $textId; ?>" />
                                                                         <button class="btn btn-warning" name="issue-user" type="submit">Issue</button>
@@ -185,30 +183,5 @@ $textId;
     </div>
 </div>
 <?php
-if (isset($_POST["issue-user"])) {
-    $textId = $_POST["textId"];
-    $userId = $_POST["userId"];
-    $qry = "INSERT INTO issue ( user_id, text_id, start_date, due_date) VALUES
-                (?, ?, CURRENT_TIMESTAMP, DATE_ADD(NOW(), INTERVAL 15 DAY));";
-    $qry2 = "UPDATE text SET book_state = 'Issued' WHERE text_id = $textId ";
-    $qry3 = "UPDATE user SET no_of_books = no_of_books + 1 WHERE user_id = $userId ";
-    $qry4 = "DELETE from reservation WHERE user_id = $userId AND text_id = $textId ";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $qry)) {
-        header("Location: addIssues.php?error=sqlerror&user_id=" . $userId . "&text_id=" . $textId);
-        exit();
-    } else {
-        mysqli_stmt_bind_param($stmt, "ss", $userId, $textId);
-        mysqli_stmt_execute($stmt);
-        mysqli_query($conn, $qry2);
-        mysqli_query($conn, $qry3);
-        mysqli_query($conn, $qry4);
-        header("Location: addIssues.php?success=membersuccess&user_id=" . $userId . "&text_id=" . $textId . "&search-issue-submit=");
-        exit();
-    }
-}
-?>
-<?php
-mysqli_close($conn);
 require "footer.php";
 ?>

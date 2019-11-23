@@ -13,15 +13,21 @@ if (isset($_POST["return-user"])) {
     $secs = $datetime2 - $datetime1;
     $days = $secs / 86400;
 
-    if ($days > 0) {
-        $qry0 = "UPDATE issue SET fine = 3 * $days WHERE user_id = $uid ";
-        $retval0 = mysqli_query($conn, $qry0);
+    if ($days < 0) {
+        $days = 0;
+    }
+
+    $qry0 = "UPDATE user SET fine = fine + 3 * $days, no_of_books = no_of_books - 1 WHERE user_id = $uid ";
+    $retval0 = mysqli_query($conn, $qry0);
+    if (!$retval0) {
+        die('FAILED\n: ' . mysqli_error($conn));
+        exit();
     }
     $qry = "UPDATE issue SET return_date = CURRENT_TIMESTAMP WHERE issue_id = $id ";
     $qry2 = "UPDATE text SET book_state = 'free' WHERE text_id = $textId ";
     $retval = mysqli_query($conn, $qry);
     $retval2 = mysqli_query($conn, $qry2);
-    if (!$retval && $retval2) {
+    if (!$retval || !$retval2) {
         die('FAILED\n: ' . mysqli_error($conn));
     } else {
         header("Location: ../profile.php?success=issuesuccess&uid=" . $uid);

@@ -80,6 +80,7 @@ require './includes/dbh.inc.php';
                             echo "<th scope='col'>Subject</th>";
                             echo "<th scope='col'>Author/Editor</th>";
                             echo "<th scope='col'>ISBN</th>";
+                            echo "<th scope='col'>Status</th>";
                             if (isset($_SESSION["user_id"])) {
                                 if ($_SESSION["role"] == "admin") {
                                     echo "<th scope='col'>Actions</th>";
@@ -96,8 +97,43 @@ require './includes/dbh.inc.php';
                                 echo "<td>" . $row['subject'] . "</td>";
                                 echo "<td>" . $row['author'] . "</td>";
                                 echo "<td>" . $row['isbn'] . "</td>";
-                                if (isset($_SESSION["user_id"])) {
-                                    if ($_SESSION["role"] == "admin") { ?>
+                                $iuid;
+                                if ($row['book_state'] != "free") {
+                                    $sql3  = "SELECT B.`firstname` , B.`lastname`, A.user_id, A.text_id FROM `issue` AS A INNER JOIN `user` AS B ON A.user_id = B.user_id where text_id=" . $row['text_id'] . " and `return_date` IS NULL ";
+                                    if ($result3 = mysqli_query($conn, $sql3)) {
+                                        if (mysqli_num_rows($result3) > 0) {
+                                            while ($row1 = mysqli_fetch_array($result3)) {
+                                                $iuid = $row1['user_id'];
+                                                $stateText = "Issued by " . $row1["firstname"] . " " . $row1["lastname"] . " (userId: " . $row1['user_id'] . ")";
+                                            }
+                                        } else {
+                                            $stateText = "Free";
+                                        }
+                                    }
+                                } else {
+                                    $stateText = "Free";
+                                }
+                                if ($stateText != "Free" && $iuid != $_SESSION['user_id']) { ?>
+                                    <td><?
+                                                        echo "$stateText <hr/>";
+                                                        $sql3  = "SELECT * FROM `reservation` WHERE user_id=" . $_SESSION['user_id'] . "  AND text_id = " . $row['text_id'] . " ";
+                                                        if ($result3 = mysqli_query($conn, $sql3)) {
+                                                            if (mysqli_num_rows($result3) > 0) {
+                                                                echo "Already Reserved";
+                                                            } else { ?>
+                                                <form method="post" action="includes/addReservations.inc.php">
+                                                    <input type="hidden" name="userId" value="<?php echo $_SESSION['user_id']; ?>" />
+                                                    <input type="hidden" name="textId" value="<?php echo $row['text_id']; ?>" />
+                                                    <button class="btn btn-outline-dark btn-sm" name="reserve-user" type="submit">Reserve</button>
+                                                </form>
+                                        <? }
+                                                        } ?>
+                                    </td>
+                                    <?php } else {
+                                                    echo "<td>$stateText</td>";
+                                                }
+                                                if (isset($_SESSION["user_id"])) {
+                                                    if ($_SESSION["role"] == "admin") { ?>
                                         <td><a class='btn btn-outline-danger btn-sm' href="index.php?id=<? echo $row['text_id']; ?>">Delete</a></td>
                     <?php }
                                 }
