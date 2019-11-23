@@ -73,8 +73,8 @@ $sql = "CREATE TABLE IF NOT EXISTS reservation (
     text_id int(11),
     time_of_resv DATETIME NOT NULL DEFAULT(CURRENT_TIMESTAMP),
     PRIMARY KEY(resv_id),
-    FOREIGN KEY (text_id) REFERENCES text(text_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id)
+    FOREIGN KEY (text_id) REFERENCES text(text_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
   )";
 $retval = mysqli_query($conn, $sql);
 if (!$retval) {
@@ -93,8 +93,8 @@ $sql = "CREATE TABLE IF NOT EXISTS issue (
     reissue_date_2 datetime DEFAULT NULL,
     reissue_no int(11) NOT NULL DEFAULT 0,
     PRIMARY KEY(issue_id),
-    FOREIGN KEY (text_id) REFERENCES text(text_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id)
+    FOREIGN KEY (text_id) REFERENCES text(text_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
   )";
 $retval = mysqli_query($conn, $sql);
 if (!$retval) {

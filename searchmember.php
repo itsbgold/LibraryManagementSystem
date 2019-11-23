@@ -113,7 +113,7 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
                                 echo "<td>" . $row['address'] . "</td>";
                                 echo "<td>" . $row['gender'] . "</td><td>";
                                 if ($_SESSION["user_id"] != $row['user_id']) { ?>
-                                    <a href="searchmember.php?id=<? echo $row['user_id']; ?>" class='btn btn-outline-danger btn-sm'>Delete</a>
+                                    <a href="includes/deleteUser.inc.php?id=<? echo $row['user_id']; ?>" class='btn btn-outline-danger btn-sm'>Delete</a>
                                     <hr />
                                 <?php } ?>
                                 <a href="profile.php?uid=<? echo $row['user_id']; ?>" class='btn btn-outline-primary btn-sm'>Info</a>
@@ -135,21 +135,6 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
         </div>
     </div>
 </div>
-<?php
-if (isset($_SESSION["user_id"])) {
-    if ($_SESSION["role"] == "admin") {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            if ($_SESSION["user_id"] != $id)
-                mysqli_query($conn, "DELETE from user WHERE user_id = $id ");
-            header("Location: searchmember.php");
-            exit();
-        }
-    }
-}
-
-mysqli_close($conn);
-?>
 <?php
 require "footer.php";
 ?>

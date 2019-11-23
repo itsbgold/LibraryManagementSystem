@@ -134,7 +134,7 @@ require './includes/dbh.inc.php';
                                                 }
                                                 if (isset($_SESSION["user_id"])) {
                                                     if ($_SESSION["role"] == "admin") { ?>
-                                        <td><a class='btn btn-outline-danger btn-sm' href="index.php?id=<? echo $row['text_id']; ?>">Delete</a></td>
+                                        <td><a class='btn btn-outline-danger btn-sm' href="includes/deletebooks.inc.php?id=<? echo $row['text_id']; ?>">Delete</a></td>
                     <?php }
                                 }
                                 echo "</tr>";
@@ -154,20 +154,7 @@ require './includes/dbh.inc.php';
         </div>
     </div>
 </div>
-<?php
-if (isset($_SESSION["user_id"])) {
-    if ($_SESSION["role"] == "admin") {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            mysqli_query($conn, "DELETE from text WHERE text_id='$id'");
-            header("Location: index.php");
-            exit();
-        }
-    }
-}
 
-mysqli_close($conn);
-?>
 <?php
 require "footer.php";
 ?>
