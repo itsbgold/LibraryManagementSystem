@@ -218,7 +218,7 @@ if (isset($_GET['uid'])) {
                             echo "<th scope='col'>Book Id</th>";
                             echo "<th scope='col'>Details</th>";
                             echo "<th scope='col'>Reservation date</th>";
-                            echo "<th scope='col'>Remarks</th>";
+                            echo "<th scope='col'>Actions</th>";
                             echo "</tr>";
                             echo "</thead> ";
                             echo "<tbody> ";

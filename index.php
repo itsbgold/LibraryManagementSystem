@@ -24,7 +24,7 @@ require './includes/dbh.inc.php';
                                 <option value="title"> Title</option>
                                 <option value="subject"> Subject</option>
                                 <option value="Isbn"> ISBN</option>
-                                <option value="author"> Author/Publisher</option>
+                                <option value="author"> Author / Editor / Publisher</option>
                             </select>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ require './includes/dbh.inc.php';
                             echo "<th scope='col'>Title</th>";
                             echo "<th scope='col'>Type</th>";
                             echo "<th scope='col'>Subject</th>";
-                            echo "<th scope='col'>Author/Editor</th>";
+                            echo "<th scope='col'>Author / Editor / Publisher</th>";
                             echo "<th scope='col'>ISBN</th>";
                             echo "<th scope='col'>Status</th>";
                             if (isset($_SESSION["user_id"])) {
@@ -113,7 +113,7 @@ require './includes/dbh.inc.php';
                                 } else {
                                     $stateText = "Free";
                                 }
-                                if ($stateText != "Free" && $iuid != $_SESSION['user_id']) { ?>
+                                if (isset($_SESSION['user_id']) && $stateText != "Free" && $iuid != $_SESSION['user_id']) { ?>
                                     <td><?
                                                         echo "$stateText <hr/>";
                                                         $sql3  = "SELECT * FROM `reservation` WHERE user_id=" . $_SESSION['user_id'] . "  AND text_id = " . $row['text_id'] . " ";

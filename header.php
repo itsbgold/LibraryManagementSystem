@@ -9,7 +9,8 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Library</title><!-- Latest compiled and minified CSS -->
+    <title>Library</title>
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -35,6 +36,7 @@ session_start();
                         <li class="nav-item <? if ($page == "searchmember") { ?>active<? } ?>"><a class="nav-link" href="searchmember.php">Search members</a></li>
                         <li class="nav-item <? if ($page == "register") { ?>active<? } ?>"><a class="nav-link" href="register.php">Add a member</a></li>
                         <li class="nav-item <? if ($page == "addIssues") { ?>active<? } ?>"><a class="nav-link" href="addIssues.php">Issue books</a></li>
+                        <li class="nav-item <? if ($page == "reservations") { ?>active<? } ?>"><a class="nav-link" href="reservations.php">Reservations</a></li>
                 <? }
                 }
                 ?>
