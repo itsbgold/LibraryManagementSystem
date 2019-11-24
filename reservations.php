@@ -1,5 +1,5 @@
 <?php
-$page = "profile";
+$page = "reservations";
 require "header.php";
 require './includes/dbh.inc.php';
 
