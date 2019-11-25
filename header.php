@@ -55,6 +55,6 @@ session_start();
     <!--/.Navbar -->
     <main class="container">
         <div class="jumbotron text-center">
-            <h2>Welcome to the Online Library Manage System</h2>
+            <h2>Welcome to the Online Library Management System</h2>
         </div>
         <br>
