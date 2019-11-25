@@ -81,8 +81,14 @@ if (isset($_GET['uid'])) {
                                         <div class='form-group row'>
                                             <label for='newpass' class='col-4 col-form-label'>Fine</label>
                                             <div class='col-8'>
-                                            " . $row['fine'] . "</div>
-                                        </div>
+                                            " . $row['fine'];
+                                if ($row['fine'] > 0) {
+                                    echo '<form method="post" action="includes/removefine.inc.php">
+                                                <input type="hidden" name="uid" value="' . $uid . '" />
+                                            <button class="btn btn-outline-danger btn-sm" name="fine-user" type="submit">Paid</button>
+                                        </form>';
+                                }
+                                echo "</div></div>
                                         <div class='form-group row'>
                                             <label for='newpass' class='col-4 col-form-label'>No of Books</label>
                                             <div class='col-8'>
