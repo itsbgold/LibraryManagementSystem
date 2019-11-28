@@ -78,7 +78,7 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="inputGroupSelect01">Date of Publication: </label>
                                         </div>
-                                        <input type="date" name="dop">
+                                        <input type="date" max=<? echo $date = date('Y-m-d'); ?> name="dop">
                                     </div>
                                 </div>
                             </div>
